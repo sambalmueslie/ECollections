@@ -6,8 +6,6 @@ import java.util.List;
 
 import org.junit.Test;
 
-import de.sambalmueslie.ecollections.internal.EFactory;
-
 public class Brainstorming {
 
 	@Test
@@ -17,8 +15,9 @@ public class Brainstorming {
 
 		sample.stream().filter(t -> t.startsWith("T")).forEach(System.out::println);
 
-		final EList<String> mySample = EFactory.decorate(sample);
-		mySample.filter(t -> t.startsWith("T")).forEach(System.out::println);
+		EList.list("This", "is", "a", "message").map(s -> s.charAt(0)).forEach(System.out::print);
+
+		EList.list("This", "is", "a", "message").map(s -> (int) s.charAt(0)).forEach(c -> System.out.print(Integer.toHexString(c) + " "));
 	}
 
 }

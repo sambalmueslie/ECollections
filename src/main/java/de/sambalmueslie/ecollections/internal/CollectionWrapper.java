@@ -83,6 +83,11 @@ class CollectionWrapper<E> implements ECollection<E> {
 	}
 
 	@Override
+	public <R> EStream<R> map(Function<? super E, ? extends R> mapper) {
+		return new StreamWrapper<>(collection.stream().map(mapper));
+	}
+
+	@Override
 	public EStream<E> parallelStream() {
 		return new StreamWrapper<>(collection.parallelStream());
 	}

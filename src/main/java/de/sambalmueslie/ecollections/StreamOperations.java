@@ -15,6 +15,8 @@ public interface StreamOperations<T> {
 
 	EStream<T> limit(long maxSize);
 
+	<R> EStream<R> map(Function<? super T, ? extends R> mapper);
+
 	EStream<T> peek(Consumer<? super T> action);
 
 	EStream<T> skip(long n);
