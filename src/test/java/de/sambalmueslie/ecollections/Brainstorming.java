@@ -18,6 +18,7 @@ public class Brainstorming {
 		EList.list("This", "is", "a", "message").map(s -> s.charAt(0)).forEach(System.out::print);
 
 		EList.list("This", "is", "a", "message").map(s -> (int) s.charAt(0)).forEach(c -> System.out.print(Integer.toHexString(c) + " "));
+
 	}
 
 }
