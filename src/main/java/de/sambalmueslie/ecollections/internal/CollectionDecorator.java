@@ -10,12 +10,12 @@ import de.sambalmueslie.ecollections.ECollection;
 import de.sambalmueslie.ecollections.EStream;
 
 /**
- * The wrapper for a {@link List} to create a {@link ECollection}.
+ * The decorator for a {@link List} to create a {@link ECollection}.
  *
  * @param <E>
  *            element type
  */
-class CollectionWrapper<E> implements ECollection<E> {
+class CollectionDecorator<E> implements ECollection<E> {
 
 	/**
 	 * Constructor.
@@ -23,7 +23,7 @@ class CollectionWrapper<E> implements ECollection<E> {
 	 * @param collection
 	 *            {@link #collection}
 	 */
-	public CollectionWrapper(Collection<E> collection) {
+	CollectionDecorator(Collection<E> collection) {
 		this.collection = collection;
 	}
 
@@ -84,12 +84,12 @@ class CollectionWrapper<E> implements ECollection<E> {
 
 	@Override
 	public <R> EStream<R> map(Function<? super E, ? extends R> mapper) {
-		return new StreamWrapper<>(collection.stream().map(mapper));
+		return new StreamDecorator<>(collection.stream().map(mapper));
 	}
 
 	@Override
 	public EStream<E> parallelStream() {
-		return new StreamWrapper<>(collection.parallelStream());
+		return new StreamDecorator<>(collection.parallelStream());
 	}
 
 	@Override
@@ -139,7 +139,7 @@ class CollectionWrapper<E> implements ECollection<E> {
 
 	@Override
 	public EStream<E> stream() {
-		return new StreamWrapper<>(collection.stream());
+		return new StreamDecorator<>(collection.stream());
 	}
 
 	@Override

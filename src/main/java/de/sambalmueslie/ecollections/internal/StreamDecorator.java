@@ -10,12 +10,12 @@ import java.util.stream.*;
 import de.sambalmueslie.ecollections.EStream;
 
 /**
- * The wrapper for the {@link EStream}.
+ * The decorator for the {@link EStream}.
  *
  * @param <T>
  *            the element type
  */
-class StreamWrapper<T> implements EStream<T> {
+class StreamDecorator<T> implements EStream<T> {
 
 	/**
 	 * Constructor.
@@ -23,7 +23,7 @@ class StreamWrapper<T> implements EStream<T> {
 	 * @param stream
 	 *            {@link #stream}
 	 */
-	StreamWrapper(Stream<T> stream) {
+	StreamDecorator(Stream<T> stream) {
 		this.stream = stream;
 	}
 
@@ -59,12 +59,12 @@ class StreamWrapper<T> implements EStream<T> {
 
 	@Override
 	public EStream<T> distinct() {
-		return new StreamWrapper<>(stream.distinct());
+		return new StreamDecorator<>(stream.distinct());
 	}
 
 	@Override
 	public EStream<T> filter(Predicate<? super T> predicate) {
-		return new StreamWrapper<>(stream.filter(predicate));
+		return new StreamDecorator<>(stream.filter(predicate));
 	}
 
 	@Override
@@ -79,7 +79,7 @@ class StreamWrapper<T> implements EStream<T> {
 
 	@Override
 	public <R> EStream<R> flatMap(Function<? super T, ? extends Stream<? extends R>> mapper) {
-		return new StreamWrapper<>(stream.flatMap(mapper));
+		return new StreamDecorator<>(stream.flatMap(mapper));
 	}
 
 	@Override
@@ -119,12 +119,12 @@ class StreamWrapper<T> implements EStream<T> {
 
 	@Override
 	public EStream<T> limit(long maxSize) {
-		return new StreamWrapper<>(stream.limit(maxSize));
+		return new StreamDecorator<>(stream.limit(maxSize));
 	}
 
 	@Override
 	public <R> EStream<R> map(Function<? super T, ? extends R> mapper) {
-		return new StreamWrapper<>(stream.map(mapper));
+		return new StreamDecorator<>(stream.map(mapper));
 	}
 
 	@Override
@@ -159,17 +159,17 @@ class StreamWrapper<T> implements EStream<T> {
 
 	@Override
 	public EStream<T> onClose(Runnable closeHandler) {
-		return new StreamWrapper<>(stream.onClose(closeHandler));
+		return new StreamDecorator<>(stream.onClose(closeHandler));
 	}
 
 	@Override
 	public EStream<T> parallel() {
-		return new StreamWrapper<>(stream.parallel());
+		return new StreamDecorator<>(stream.parallel());
 	}
 
 	@Override
 	public EStream<T> peek(Consumer<? super T> action) {
-		return new StreamWrapper<>(stream.peek(action));
+		return new StreamDecorator<>(stream.peek(action));
 	}
 
 	@Override
@@ -189,22 +189,22 @@ class StreamWrapper<T> implements EStream<T> {
 
 	@Override
 	public EStream<T> sequential() {
-		return new StreamWrapper<>(stream.sequential());
+		return new StreamDecorator<>(stream.sequential());
 	}
 
 	@Override
 	public EStream<T> skip(long n) {
-		return new StreamWrapper<>(stream.skip(n));
+		return new StreamDecorator<>(stream.skip(n));
 	}
 
 	@Override
 	public EStream<T> sorted() {
-		return new StreamWrapper<>(stream.sorted());
+		return new StreamDecorator<>(stream.sorted());
 	}
 
 	@Override
 	public EStream<T> sorted(Comparator<? super T> comparator) {
-		return new StreamWrapper<>(stream.sorted(comparator));
+		return new StreamDecorator<>(stream.sorted(comparator));
 	}
 
 	@Override
@@ -234,7 +234,7 @@ class StreamWrapper<T> implements EStream<T> {
 
 	@Override
 	public EStream<T> unordered() {
-		return new StreamWrapper<>(stream);
+		return new StreamDecorator<>(stream);
 	}
 
 	/** the {@link Stream}. */

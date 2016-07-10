@@ -7,12 +7,12 @@ import java.util.ListIterator;
 import de.sambalmueslie.ecollections.EList;
 
 /**
- * The wrapper for a {@link List} to create a {@link EList}.
+ * The decorator for a {@link List} to create a {@link EList}.
  *
  * @param <E>
  *            element type
  */
-class ListWrapper<E> extends CollectionWrapper<E> implements EList<E> {
+class ListDecorator<E> extends CollectionDecorator<E> implements EList<E> {
 
 	/**
 	 * Constructor.
@@ -20,7 +20,7 @@ class ListWrapper<E> extends CollectionWrapper<E> implements EList<E> {
 	 * @param list
 	 *            {@link #list}
 	 */
-	ListWrapper(List<E> list) {
+	ListDecorator(List<E> list) {
 		super(list);
 		this.list = list;
 	}
